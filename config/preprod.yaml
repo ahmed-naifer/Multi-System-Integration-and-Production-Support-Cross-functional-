@@ -1,0 +1,24 @@
+# Configuration - Environnement PreProd
+environment: PREPROD
+
+source_system:
+  name: "CoreBanking-PreProd"
+  outbox_path: "source_system/outbox"
+
+target_system:
+  name: "AccountingSystem-PreProd"
+  db_path: "data/preprod/accounting.db"
+
+middleware:
+  strict_validation: true       # se rapproche des règles de production
+  max_batch_size: 200
+  quarantine_on_error: true
+
+incident_management:
+  sla_hours:
+    CRITICAL: 2
+    HIGH: 12
+    MEDIUM: 48
+
+logging:
+  level: INFO

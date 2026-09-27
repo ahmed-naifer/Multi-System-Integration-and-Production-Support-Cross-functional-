@@ -1,0 +1,24 @@
+# Configuration - Environnement UAT (User Acceptance Testing)
+environment: UAT
+
+source_system:
+  name: "CoreBanking-UAT"
+  outbox_path: "source_system/outbox"
+
+target_system:
+  name: "AccountingSystem-UAT"
+  db_path: "data/uat/accounting.db"
+
+middleware:
+  strict_validation: false      # tolérant : les warnings ne bloquent pas
+  max_batch_size: 50
+  quarantine_on_error: true     # les messages en échec sont mis en quarantaine, pas perdus
+
+incident_management:
+  sla_hours:
+    CRITICAL: 4
+    HIGH: 24
+    MEDIUM: 72
+
+logging:
+  level: DEBUG

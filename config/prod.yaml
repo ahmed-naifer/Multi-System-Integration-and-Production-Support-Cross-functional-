@@ -1,0 +1,24 @@
+# Configuration - Environnement Production
+environment: PRODUCTION
+
+source_system:
+  name: "CoreBanking-PROD"
+  outbox_path: "source_system/outbox"
+
+target_system:
+  name: "AccountingSystem-PROD"
+  db_path: "data/prod/accounting.db"
+
+middleware:
+  strict_validation: true       # aucune tolérance en production
+  max_batch_size: 1000
+  quarantine_on_error: true     # jamais de perte silencieuse de données en Prod
+
+incident_management:
+  sla_hours:
+    CRITICAL: 1                 # SLA le plus strict en production
+    HIGH: 4
+    MEDIUM: 24
+
+logging:
+  level: WARNING
